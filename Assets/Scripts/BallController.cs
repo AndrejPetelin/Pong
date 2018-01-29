@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour {
     Rigidbody2D rigidBody;
+    GameObject gameController;
+
 
 	// Use this for initialization
 	void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        gameController = GameObject.FindGameObjectWithTag("GameController");
 	}
 	
 	// FixedUpdate is called once per physics engine cycle
@@ -25,6 +28,7 @@ public class BallController : MonoBehaviour {
     public void reset()
     {
         transform.SetPositionAndRotation(new Vector3(), new Quaternion());
+        setVelocity(new Vector2());
     }
 
     public void addForce(Vector2 impulse)
@@ -48,5 +52,10 @@ public class BallController : MonoBehaviour {
     {
         return rigidBody.velocity;
     }
-    
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        gameController.SendMessage("goalHit", collision.name);
+    }
+
 }
