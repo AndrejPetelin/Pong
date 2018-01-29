@@ -1,5 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/**
+ * BallController.cs - controll script for the ball object.
+ * 
+ * Exposes the functions
+ */
+
+
 using UnityEngine;
 
 public class BallController : MonoBehaviour {
@@ -20,27 +25,33 @@ public class BallController : MonoBehaviour {
 
 	}
 
+    // check for collision with the specified collider
     public bool collides(Collider2D other)
     {
         return rigidBody.IsTouching(other);
     }
 
+    // returns the ball to starting position (0, 0) and sets velocity to 0.
     public void reset()
     {
         transform.SetPositionAndRotation(new Vector3(), new Quaternion());
         setVelocity(new Vector2());
     }
 
-    public void addForce(Vector2 impulse)
+    // add a one-time force impulse to the ball
+    public void addImpulse(Vector2 impulse)
     {
         rigidBody.AddForce(impulse, ForceMode2D.Impulse);
     }
 
+
+    // set velocity of the ball per coordinate
     public void setVelocity(Vector2 v)
     {
         rigidBody.velocity = v;
     }
 
+    // overloaded setVelocity, takes absolute velocity and angle
     public void setVelocity(float v, float ang)
     {
         float vx = v * Mathf.Cos(ang * Mathf.Deg2Rad);
@@ -53,6 +64,7 @@ public class BallController : MonoBehaviour {
         return rigidBody.velocity;
     }
 
+    // when collision is detected send a message to the gameController
     public void OnTriggerEnter2D(Collider2D collision)
     {
         gameController.SendMessage("goalHit", collision.name);
