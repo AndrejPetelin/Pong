@@ -140,11 +140,11 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 2
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 2c7fecb98f33946a499f617c6610351e, type: 2}
+  m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!1001 &528290952
 Prefab:
@@ -434,7 +434,7 @@ GameObject:
   - component: {fileID: 1449460696}
   m_Layer: 0
   m_Name: Game
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
