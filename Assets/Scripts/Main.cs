@@ -40,6 +40,7 @@ public class Main : MonoBehaviour
 		}
 		else if (gameState == GameState.serve)
 		{
+<<<<<<< HEAD
 			// serve ball on enter key pressed
 			if (Input.GetKey (KeyCode.Return) || Input.GetKey (KeyCode.KeypadEnter)) {
 				gameState = GameState.play;
@@ -59,6 +60,27 @@ public class Main : MonoBehaviour
 
 				ball.setVelocity (v, a);
 			}
+=======
+            // serve ball on enter key pressed
+            if (Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.KeypadEnter))
+            {
+                // before switching to play, initialize ball's velocity and direction
+                // TODO: consider breaking down speed into x and y components
+                // originally in Colton's Pong speed is broken down into x and y,
+                // see if this should be applied here (overloaded function already in BallController)
+                float v = Helpers.random(1.4f, 2.0f);
+                float a = Helpers.random(-45.0f, 45.0f);
+                //float a = 0f;
+                // reverse direction if player 2 is serving
+                if (servingPlayer != 1)
+                {
+                    v *= -1.0f;
+                }
+
+                ball.setVelocity(v, a);
+                gameState = GameState.play;
+            }
+>>>>>>> 9ce6b2b9f442cc36c73979348580d000f50d2ca3
 		}
 		/*else if (gameState == GameState.play)
         {
@@ -78,6 +100,7 @@ public class Main : MonoBehaviour
 	}*/
 	}
 
+<<<<<<< HEAD
 	void goalHit(string goal) {
 		if (goal == "GoalPlayer1") {
 			++player2score;
@@ -95,4 +118,24 @@ public class Main : MonoBehaviour
 	}
 
 
+=======
+    void goalHit(string goal)
+    {
+        if (goal == "GoalPlayer1")
+        {
+            ++player2score;    
+            servingPlayer = 1;
+        }
+        else
+        {
+            ++player1score;
+            servingPlayer = 2;
+        }
+
+        ball.reset();
+        gameState = GameState.serve;
+
+        if (player1score == 10 || player2score == 10) gameState = GameState.done;
+    }
+>>>>>>> 9ce6b2b9f442cc36c73979348580d000f50d2ca3
 }
