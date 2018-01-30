@@ -1,19 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/**
+ * PaddleController.cs - controls the paddle
+ * 
+ * Part of the Paddle prefab, controls te movement and input of the paddle.
+ * Uses keys, assigned via editor to move the paddle up and down.
+ */
+
 using UnityEngine;
 
 public class PaddleController : MonoBehaviour
 {
-	Rigidbody2D rigidBody;
 	public Vector2 velocity;
-	public Collider2D boxCollider { get; private set; }
-
-	Vector2 currVelocity;
-	public KeyCode keyUp;
+    public KeyCode keyUp;
 	public KeyCode keyDown;
 
-	// Use this for initialization
-	void Start()
+    // not set via editor, but can be accessed by the game controller
+    public Collider2D boxCollider { get; private set; }
+
+    Rigidbody2D rigidBody;
+    Vector2 currVelocity;
+
+
+    /**
+     * Use this for initialization
+     */
+    void Start()
 	{
 		rigidBody = GetComponent<Rigidbody2D>();
 
@@ -23,7 +33,10 @@ public class PaddleController : MonoBehaviour
 
 	}
 
-	// Update is called once per frame
+
+	/**
+     * Update is called once per frame
+     */
 	void Update () {
 		if (Input.GetKey (keyUp)) {
 			currVelocity = velocity;
@@ -34,6 +47,10 @@ public class PaddleController : MonoBehaviour
 		}
 	}
 
+
+    /**
+     * FixedUpdate is called once per physics engine cycle
+     */
 	void FixedUpdate() {		
 		rigidBody.MovePosition (rigidBody.position + currVelocity * Time.deltaTime);
 	}

@@ -1,11 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/**
+ * Main.cs - the game controller class
+ * 
+ * This is where everything happens. The class is in a GameObject in the scene
+ * and records and controls the game state.
+ */
+
 using UnityEngine;
 
-enum GameState { start, serve, play, done }
 
 public class Main : MonoBehaviour
 {
+    // initialized in the editor
 	public PaddleController player1 = null;
 	public PaddleController player2 = null;
 	public BallController ball = null;
@@ -16,20 +21,23 @@ public class Main : MonoBehaviour
 	int servingPlayer = 1;
 	int winningPlayer = 0;
 
-	// BallController ballCtrl;
-
+    // see enum at bottom of class for details
 	GameState gameState = GameState.start;
+
 
 	// Use this for initialization
 	void Awake()
 	{
 		// ballCtrl = ball.GetComponent<BallController>();
-
 	}
 
-	// Update is called once per frame
+
+    /**
+     * FixedUpdate is called once per physics engine frame
+     */
 	void FixedUpdate()
 	{
+        // check the states
 		if (gameState == GameState.start)
 		{
 			// begin game when enter key pressed
@@ -78,6 +86,10 @@ public class Main : MonoBehaviour
 	}*/
 	}
 
+
+    /**
+     * one of the players has scored, BallController calls this function via SendMessage.
+     */
     void goalHit(string goal)
     {
         if (goal == "GoalPlayer1")
@@ -96,4 +108,14 @@ public class Main : MonoBehaviour
 
         if (player1score == 10 || player2score == 10) gameState = GameState.done;
     }
+
+
+     /**
+     * an enum type to describe game state
+     * start - the very start of the game
+     * serve - start the ball rolling
+     * play - state during gameplay
+     * done - game finished, one of the players won
+     */
+    enum GameState { start, serve, play, done }
 }
