@@ -1,8 +1,8 @@
 ﻿/**
  * Main.cs - the game controller class
  * 
- * This is where everything happens. The class is in a GameObject in the scene
- * and records and controls the game state.
+ * This is where everything happens. The script is added to a GameObject in the
+ * scene and records and controls the game state.
  */
 
 using UnityEngine;
@@ -14,7 +14,6 @@ public class Main : MonoBehaviour
 	public PaddleController player1 = null;
 	public PaddleController player2 = null;
 	public BallController ball = null;
-
 
 	int player1score = 0;
 	int player2score = 0;
